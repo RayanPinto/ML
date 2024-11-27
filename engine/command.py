@@ -14,6 +14,7 @@ def speak(text):
     engine.runAndWait()
 
 
+
 def takecommand():
 
     r = sr.Recognizer()

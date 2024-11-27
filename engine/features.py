@@ -1,5 +1,5 @@
 import os
-from pipes import quote
+from shlex import quote
 import re
 import sqlite3
 import struct
@@ -10,13 +10,14 @@ from playsound import playsound
 import eel
 import pyaudio
 import pyautogui
-from engine.command import speak
-from engine.config import ASSISTANT_NAME
+from .command import speak
+
+from .config import ASSISTANT_NAME
 # Playing assiatnt sound function
 import pywhatkit as kit
 import pvporcupine
 
-from engine.helper import extract_yt_term, remove_words
+from .helper import extract_yt_term, remove_words
 from hugchat import hugchat
 
 con = sqlite3.connect("jarvis.db")
@@ -88,7 +89,7 @@ def hotword():
             keyword=audio_stream.read(porcupine.frame_length)
             keyword=struct.unpack_from("h"*porcupine.frame_length,keyword)
 
-            # processing keyword comes from mic 
+            # processing keyword comes from mic
             keyword_index=porcupine.process(keyword)
 
             # checking first keyword detetcted for not
@@ -176,7 +177,7 @@ def whatsApp(mobile_no, message, flag, name):
 # chat bot 
 def chatBot(query):
     user_input = query.lower()
-    chatbot = hugchat.ChatBot(cookie_path="engine\cookies.json")
+    chatbot = hugchat.ChatBot(cookie_path="engine/cookies.json")
     id = chatbot.new_conversation()
     chatbot.change_conversation(id)
     response =  chatbot.chat(user_input)
