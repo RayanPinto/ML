@@ -34,7 +34,12 @@ def takecommand():
         print(f"user said: {query}")
         eel.DisplayMessage(query)
         time.sleep(2)
-       
+    except sr.UnknownValueError:
+        speak("Sorry, I could not understand that.")
+        return ""
+    except sr.RequestError as e:
+        speak("Sorry, there was an error with the speech recognition service.")
+        return ""   
     except Exception as e:
         return ""
     
